@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class TableroScript : MonoBehaviour
 {
-
+    
     public GameObject Colum1;
     public GameObject Colum2;
     public GameObject Colum3;
@@ -25,6 +27,8 @@ public class TableroScript : MonoBehaviour
     public MeshFilter FichaJugador2;
     public GameObject FichaJugador1obj;
     public GameObject FichaJugador2obj;
+    public GameObject Jugador1Win;
+    public GameObject Jugador2Win;
     private int turno;
     private int ColNumber;
     private int FilNumber;
@@ -34,6 +38,18 @@ public class TableroScript : MonoBehaviour
     private int Col4Ficha;
     private int Col5Ficha;
     private int Col6Ficha;
+    private int Colu;
+    private int Fila;
+    private int Esp1;
+    private int Esp2;
+    private int Esp3;
+    private int Esp4;
+    private int Esp5;
+    private int Esp6;
+    private int Jugador;
+    private int ganar1;
+    private int ganar2;
+    private int JugadorGanador;
 
     int rows;
     int columns;
@@ -41,23 +57,28 @@ public class TableroScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         rows = 6;
         columns = 6;
         matrix = new int[rows, columns];
         turno = 0;
         FichaJugador2obj.SetActive(false);
         FichaJugador1obj.SetActive(true);
+        Jugador1Win.SetActive(false);
+        Jugador2Win.SetActive(false);
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (turno == 0)
         {
             FichaJugador2obj.SetActive(false);
             FichaJugador1obj.SetActive(true);
             FichaOrg = FichaJugador1;
+            Jugador = 1;
         }
 
         if (turno == 1)
@@ -66,6 +87,7 @@ public class TableroScript : MonoBehaviour
             FichaJugador2obj.SetActive(true);
             FichaJugador1obj.SetActive(false);
             FichaOrg = FichaJugador2;
+            Jugador = 2;
         }
 
 
@@ -142,7 +164,12 @@ public class TableroScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+
+            if (JugadorGanador == 0)
+            {
+
             
+
 
             if (turno == 0)
             {
@@ -616,6 +643,39 @@ public class TableroScript : MonoBehaviour
 
             }
 
+            Colu = ColNumber;
+
+            if (ColNumber == 1)
+            {
+                Fila = Col1Ficha;
+            }
+
+            if (ColNumber == 2)
+            {
+                Fila = Col2Ficha;
+            }
+
+            if (ColNumber == 3)
+            {
+                Fila = Col3Ficha;
+            }
+
+            if (ColNumber == 4)
+            {
+                Fila = Col4Ficha;
+            }
+
+            if (ColNumber == 5)
+            {
+                Fila = Col5Ficha;
+            }
+
+            if (ColNumber == 6)
+            {
+                Fila = Col6Ficha;
+            }
+
+
             turno += 1;
 
             if (turno == 2)
@@ -623,46 +683,370 @@ public class TableroScript : MonoBehaviour
                 turno = 0;
             }
 
+            Esp1 = matrix[Colu - 1, 0];
+            Esp2 = matrix[Colu - 1, 1];
+            Esp3 = matrix[Colu - 1, 2];
+            Esp4 = matrix[Colu - 1, 3];
+            Esp5 = matrix[Colu - 1, 4];
+            Esp6 = matrix[Colu - 1, 5];
 
 
-            Debug.Log("1 -1 / " + matrix[0, 0]);
-            Debug.Log("1 -2 / " + matrix[0, 1]);
-            Debug.Log("1 -3 / " + matrix[0, 2]);
-            Debug.Log("1 -4 / " + matrix[0, 3]);
-            Debug.Log("1 -5 / " + matrix[0, 4]);
-            Debug.Log("1 -6 / " + matrix[0, 5]);
-            Debug.Log("2 -1 / " + matrix[1, 0]);
-            Debug.Log("2 -2 / " + matrix[1, 1]);
-            Debug.Log("2 -3 / " + matrix[1, 2]);
-            Debug.Log("2 -4 / " + matrix[1, 3]);
-            Debug.Log("2 -5 / " + matrix[1, 4]);
-            Debug.Log("2 -6 / " + matrix[1, 5]);
-            Debug.Log("3 -1 / " + matrix[2, 0]);
-            Debug.Log("3 -2 / " + matrix[2, 1]);
-            Debug.Log("3 -3 / " + matrix[2, 2]);
-            Debug.Log("3 -4 / " + matrix[2, 3]);
-            Debug.Log("3 -5 / " + matrix[2, 4]);
-            Debug.Log("3 -6 / " + matrix[2, 5]);
-            Debug.Log("4 -1 / " + matrix[3, 0]);
-            Debug.Log("4 -2 / " + matrix[3, 1]);
-            Debug.Log("4 -3 / " + matrix[3, 2]);
-            Debug.Log("4 -4 / " + matrix[3, 3]);
-            Debug.Log("4 -5 / " + matrix[3, 4]);
-            Debug.Log("4 -6 / " + matrix[3, 5]);
-            Debug.Log("5 -1 / " + matrix[4, 0]);
-            Debug.Log("5 -2 / " + matrix[4, 1]);
-            Debug.Log("5 -3 / " + matrix[4, 2]);
-            Debug.Log("5 -4 / " + matrix[4, 3]);
-            Debug.Log("5 -5 / " + matrix[4, 4]);
-            Debug.Log("5 -6 / " + matrix[4, 5]);
-            Debug.Log("6 -1 / " + matrix[5, 0]);
-            Debug.Log("6 -2 / " + matrix[5, 1]);
-            Debug.Log("6 -3 / " + matrix[5, 2]);
-            Debug.Log("6 -4 / " + matrix[5, 3]);
-            Debug.Log("6 -5 / " + matrix[5, 4]);
-            Debug.Log("6 -6 / " + matrix[5, 5]);
+            switch (Esp1)
+            {
+                case 2:
+                    ganar2 += 1;
+                    ganar1 = 0 ;
+                 break;
+              
+                  case 1:
+                    ganar1 += 1;
+                    ganar2 = 0;
+                  break;
+            }
+
+
+            switch (Esp2)
+            {
+                case 2:
+                    ganar2 += 1;
+                    ganar1 = 0;
+                    break;
+
+                case 1:
+                    ganar1 += 1;
+                    ganar2 = 0;
+                    break;
+            }
+
+            switch (Esp3)
+            {
+                case 2:
+                    ganar2 += 1;
+                    ganar1 = 0;
+                    break;
+
+                case 1:
+                    ganar1 += 1;
+                    ganar2 = 0;
+                    break;
+            }
+
+            switch (Esp4)
+            {
+                case 2:
+                    ganar2 += 1;
+                    ganar1 = 0;
+                    break;
+
+                case 1:
+                    ganar1 += 1;
+                    ganar2 = 0;
+                    break;
+            }
+
+            switch (Esp5)
+            {
+                case 2:
+                    ganar2 += 1;
+                    ganar1 = 0;
+                    break;
+
+                case 1:
+                    ganar1 += 1;
+                    ganar2 = 0;
+                    break;
+            }
+
+            switch (Esp6)
+            {
+                case 2:
+                    ganar2 += 1;
+                    ganar1 = 0;
+                    break;
+
+                case 1:
+                    ganar1 += 1;
+                    ganar2 = 0;
+                    break;
+            }
+
+            if (ganar1 > 3)
+            {
+                    JugadorGanador = 1;
+                    Debug.Log("GANO JUGADOR 1" );
+            }
+
+            if (ganar2 > 3)
+            {
+                    JugadorGanador = 2;
+                Debug.Log("GANO JUGADOR 2");
+            }
+
+            ganar1 = 0;
+            ganar2 = 0;
+
+            Esp1 = matrix[0, Fila - 1];
+            Esp2 = matrix[1, Fila - 1];
+            Esp3 = matrix[2, Fila - 1];
+            Esp4 = matrix[3, Fila - 1];
+            Esp5 = matrix[4, Fila - 1];
+            Esp6 = matrix[5, Fila - 1];
+
+            switch (Esp1)
+            {
+                case 2:
+                    ganar2 += 1;
+                    ganar1 = 0;
+                    break;
+
+                case 1:
+                    ganar1 += 1;
+                    ganar2 = 0;
+                    break;
+
+                case 0:
+                    ganar1 = 0;
+                    ganar2 = 0;
+                    break;
+            }
+
+                if (ganar1 == 4 || ganar2 == 4)
+                {
+                    if (ganar1 > 3)
+                    {
+                        JugadorGanador = 1;
+                        Debug.Log("GANO JUGADOR 1");
+                    }
+
+                    if (ganar2 > 3)
+                    {
+                        JugadorGanador = 2;
+                        Debug.Log("GANO JUGADOR 2");
+                    }
+                }
+
+                switch (Esp2)
+            {
+                case 2:
+                    ganar2 += 1;
+                    ganar1 = 0;
+                    break;
+
+                case 1:
+                    ganar1 += 1;
+                    ganar2 = 0;
+                    break;
+
+                case 0:
+                    ganar1 = 0;
+                    ganar2 = 0;
+                    break;
+            }
+
+                if (ganar1 == 4 || ganar2 == 4)
+                {
+                    if (ganar1 > 3)
+                    {
+                        JugadorGanador = 1;
+                        Debug.Log("GANO JUGADOR 1");
+                    }
+
+                    if (ganar2 > 3)
+                    {
+                        JugadorGanador = 2;
+                        Debug.Log("GANO JUGADOR 2");
+                    }
+                }
+
+                switch (Esp3)
+            {
+                case 2:
+                    ganar2 += 1;
+                    ganar1 = 0;
+                    break;
+
+                case 1:
+                    ganar1 += 1;
+                    ganar2 = 0;
+                    break;
+
+                case 0:
+                    ganar1 = 0;
+                    ganar2 = 0;
+                    break;
+            }
+
+                if (ganar1 == 4 || ganar2 == 4)
+                {
+                    if (ganar1 > 3)
+                    {
+                        JugadorGanador = 1;
+                        Debug.Log("GANO JUGADOR 1");
+                    }
+
+                    if (ganar2 > 3)
+                    {
+                        JugadorGanador = 2;
+                        Debug.Log("GANO JUGADOR 2");
+                    }
+                }
+
+                switch (Esp4)
+            {
+                case 2:
+                    ganar2 += 1;
+                    ganar1 = 0;
+                    break;
+
+                case 1:
+                    ganar1 += 1;
+                    ganar2 = 0;
+                    break;
+
+                case 0:
+                    ganar1 = 0;
+                    ganar2 = 0;
+                    break;
+            }
+
+                if (ganar1 == 4 || ganar2 == 4)
+                {
+                    if (ganar1 > 3)
+                    {
+                        JugadorGanador = 1;
+                        Debug.Log("GANO JUGADOR 1");
+                    }
+
+                    if (ganar2 > 3)
+                    {
+                        JugadorGanador = 2;
+                        Debug.Log("GANO JUGADOR 2");
+                    }
+                }
+
+                switch (Esp5)
+            {
+                case 2:
+                    ganar2 += 1;
+                    ganar1 = 0;
+                    break;
+
+                case 1:
+                    ganar1 += 1;
+                    ganar2 = 0;
+                    break;
+
+                case 0:
+                    ganar1 = 0;
+                    ganar2 = 0;
+                    break;
+            }
+
+                if (ganar1 == 4 || ganar2 == 4)
+                {
+                    if (ganar1 > 3)
+                    {
+                        JugadorGanador = 1;
+                        Debug.Log("GANO JUGADOR 1");
+                    }
+
+                    if (ganar2 > 3)
+                    {
+                        JugadorGanador = 2;
+                        Debug.Log("GANO JUGADOR 2");
+                    }
+                }
+
+                switch (Esp6)
+            {
+                case 2:
+                    ganar2 += 1;
+                    ganar1 = 0;
+                    break;
+
+                case 1:
+                    ganar1 += 1;
+                    ganar2 = 0;
+                    break;
+
+                case 0:
+                    ganar1 = 0;
+                    ganar2 = 0;
+                    break;
+            }
+
+            if (ganar1 == 4 || ganar2 == 4)
+            {
+                if (ganar1 > 3)
+                {
+                        JugadorGanador = 1;
+                        Debug.Log("GANO JUGADOR 1");
+                }
+
+                if (ganar2 > 3)
+                {
+                        JugadorGanador = 2;
+                        Debug.Log("GANO JUGADOR 2");
+                }
+            }
+
+                if (JugadorGanador == 1)
+                    Jugador1Win.SetActive(true);
+                if (JugadorGanador == 2)
+                    Jugador2Win.SetActive(true);
+                //Debug.Log("Ganar1 " + ganar1);
+                //Debug.Log("Ganar2 " +ganar2);
+                Debug.Log("Espacio 1 " + Esp1);
+            Debug.Log("Espacio 2 " + Esp2);
+            Debug.Log("Espacio 3 " + Esp3);
+            Debug.Log("Espacio 4 " + Esp4);
+            Debug.Log("Espacio 5 " + Esp5);
+            Debug.Log("Espacio 6 " + Esp6);
+            //Debug.Log("Columna " + Colu);
+            //Debug.Log("Fila " + Fila);
+            ganar1 = 0;
+            ganar2 = 0;
+                //Debug.Log("1 -1 / " + matrix[0, 0]);
+                //Debug.Log("1 -2 / " + matrix[0, 1]);
+                //Debug.Log("1 -3 / " + matrix[0, 2]);
+                //Debug.Log("1 -4 / " + matrix[0, 3]);
+                //Debug.Log("1 -5 / " + matrix[0, 4]);
+                //Debug.Log("1 -6 / " + matrix[0, 5]);
+                //Debug.Log("2 -1 / " + matrix[1, 0]);
+                //Debug.Log("2 -2 / " + matrix[1, 1]);
+                //Debug.Log("2 -3 / " + matrix[1, 2]);
+                //Debug.Log("2 -4 / " + matrix[1, 3]);
+                //Debug.Log("2 -5 / " + matrix[1, 4]);
+                //Debug.Log("2 -6 / " + matrix[1, 5]);
+                //Debug.Log("3 -1 / " + matrix[2, 0]);
+                //Debug.Log("3 -2 / " + matrix[2, 1]);
+                //Debug.Log("3 -3 / " + matrix[2, 2]);
+                //Debug.Log("3 -4 / " + matrix[2, 3]);
+                //Debug.Log("3 -5 / " + matrix[2, 4]);
+                //Debug.Log("3 -6 / " + matrix[2, 5]);
+                //Debug.Log("4 -1 / " + matrix[3, 0]);
+                //Debug.Log("4 -2 / " + matrix[3, 1]);
+                //Debug.Log("4 -3 / " + matrix[3, 2]);
+                //Debug.Log("4 -4 / " + matrix[3, 3]);
+                //Debug.Log("4 -5 / " + matrix[3, 4]);
+                //Debug.Log("4 -6 / " + matrix[3, 5]);
+                //Debug.Log("5 -1 / " + matrix[4, 0]);
+                //Debug.Log("5 -2 / " + matrix[4, 1]);
+                //Debug.Log("5 -3 / " + matrix[4, 2]);
+                //Debug.Log("5 -4 / " + matrix[4, 3]);
+                //Debug.Log("5 -5 / " + matrix[4, 4]);
+                //Debug.Log("5 -6 / " + matrix[4, 5]);
+                //Debug.Log("6 -1 / " + matrix[5, 0]);
+                //Debug.Log("6 -2 / " + matrix[5, 1]);
+                //Debug.Log("6 -3 / " + matrix[5, 2]);
+                //Debug.Log("6 -4 / " + matrix[5, 3]);
+                //Debug.Log("6 -5 / " + matrix[5, 4]);
+                //Debug.Log("6 -6 / " + matrix[5, 5]);
+
+            }
+
         }
-        
+
 
     }
 }

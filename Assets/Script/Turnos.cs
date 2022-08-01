@@ -1,24 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class Turnos : MonoBehaviour
 {
-    public GameObject FichaJugador1;
-    public GameObject FichaJugador2;
+    public TextMeshProUGUI TextoTurno;
+    private int Jugador;
 
     // Start is called before the first frame update
     void Start()
     {
-        FichaJugador1.SetActive(true);
-        FichaJugador2.SetActive(false);
-
+        Jugador = 1;
+        TextoTurno.text = "Turno de Jugador " + Jugador;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-    
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jugador += 1;
+            if (Jugador > 2)
+            {
+                Jugador = 1;
+            }
+            TextoTurno.text = "Turno de Jugador " + Jugador;
+        }
     }
 }

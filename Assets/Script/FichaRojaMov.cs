@@ -31,22 +31,7 @@ public class FichaRojaMov : MonoBehaviour
 
 
 
-        if (transform.position.y < 5)
-        {
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                transform.position = transform.position + new Vector3(0, 2f, 0);
-            }
-        }
-
-
-        if (transform.position.y > -5)
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                transform.position = transform.position + new Vector3(0, -2f, 0);
-            }
-        }
+        
         
 
 
